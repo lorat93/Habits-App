@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Add a habit</title>
+		<link rel="stylesheet" href="../css/forms.css">
+		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="../js/add.js"></script>
+
+		<script>
+
+		</script>
+	<!-- start Mixpanel --><script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
+mixpanel.init("36bbe56ef6088e881a79b36f1c7c1a3c");</script><!-- end Mixpanel -->
+</head>
+	<body onload="resetfields()">
+	
+		<div class="forms">
+			<h2>Add A Habit</h2>
+			<form action="list.html" id="habitForm" onsubmit="return validateBoxes(this);">
+				<p><label><span id="title_text">Habit Title</span></label></p>
+				<p><input required id="title" type="text" name="fullname" placeholder="Exercise 30 minutes" pattern="[^</>*_|]{1,30}"></p>
+				<p><label>Habit Icon</label></p>
+				<img id="icon1" class="icon" onclick="selectImage('icon1');" src="../img/sleep.jpg" alt="sleep image"/>
+				<img id="icon2" class="icon" onclick="selectImage('icon2');" src="../img/salad.jpg" alt="eat image"/>
+				<img id="icon3" class="icon" onclick="selectImage('icon3');" src="../img/run.jpg" alt="run image"/>
+				<img id="icon4" class="icon" src="../img/add.png" alt="find a image"/>
+				<p><label>Weekly Frequency</label></p>
+				<div id="ck-button">
+					<label> <input id="date_1" type="checkbox" name="date" value="0"><span>Sun</span></label>
+					<label> <input id="date_2" type="checkbox" name="date" value="1"><span>Mon</span></label>
+					<label> <input id="date_3" type="checkbox" name="date" value="2"><span>Tues</span></label>
+					<label> <input id="date_4" type="checkbox" name="date" value="3"><span>Wed</span></label>
+					<label> <input id="date_5" type="checkbox" name="date" value="4"><span>Thur</span></label>
+					<label> <input id="date_6" type="checkbox" name="date" value="5"><span>Fri</span></label>
+					<label> <input id="date_7" type="checkbox" name="date" value="6"><span>Sat</span></label>
+				</div>
+		
+		
+				<p><label>Daily Frequency</label></p>
+				<div id="daily-button">
+					<label> <input type="radio" id="day_1" name="day" value="1"><span>1</span></label>
+					<label> <input type="radio" id="day_2" name="day" value="2"><span>2</span></label>
+					<label> <input type="radio" id="day_3" name="day" value="3"><span>3</span></label>
+					<span id="times">times</span>
+				</div>
+                
+				<input type="radio" id="other" name="day" value="">Other: <input id="other_text" type="number" min="4" name="day" placeholder="More than 3 times" pattern="[^</>*_|]{1,30}">
+
+				<p><label>Reminder Frequency</label></p>
+				<select id="freqDropdown">
+					<option value="1">1 hour</option>
+					<option value="2">2 hours</option>
+					<option value="3">3 hours</option>
+					<option value="4">4 hours</option>
+					<option value="5">5 hours</option>
+					<option value="6">6 hours</option>
+					<option value="12">12 hours</option>
+					<option value="24">24 hours</option>
+					<option value="-1">No notifications</option>
+				</select>
+				
+				<p id="save_p"><input id="save" type="submit" value="Save It" onclick="saveHabit();"></p>
+				<p id="cancel_p"><input id="cancel" type="submit" value="Cancel" onclick="location.href='list.html'"></p>
+                
+			</form>
+		</div>
+
+	
+        		<script src="../js/add.js"></script>
+		<script src="../js/list.js"></script>
+	
+		
+	</body>
+</html>

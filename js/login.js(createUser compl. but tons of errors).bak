@@ -1,0 +1,194 @@
+/******2nd try simple, no browser console errors***************/
+
+/* validator for the user/password form*/
+function validateForm(userForm){
+	var result = false;
+
+	/*** UNCOMMENT THE NEXT 2 lines for HW5. for HW4, we will use default user info
+	var user = userForm.usermail.value;
+	var pass = userForm.password.value;
+	
+	***/
+	
+	var user = userForm.usermail.value;
+	var pass = userForm.password.value;
+	alert( user + " , " + pass );
+	
+	var ref = new Firebase('https://burning-inferno-2190.firebaseIO.com');
+	ref.createUser({
+		email    : user,
+		password :  pass
+		}, function(error, userData) {
+			if (error) {
+				switch (error.code) {
+					case "EMAIL_TAKEN":
+						console.log("The new user account cannot be created because the email is already in use.");
+						
+						break;
+					case "INVALID_EMAIL":
+						console.log("The specified email is not a valid email.");
+						
+						break;
+					default:
+					console.log("Error creating user:", error);
+					
+    }
+			} else {
+				result=true;
+				//alert( "value: " + document.getElementById("flag").value);
+				console.log("Successfully created user account with uid:", userData.uid);
+				//document.getElementById("flag").value = true;
+				//alert( "value2: " + document.getElementById("flag").value);
+				//alert("Successfully created account! Please log in!");
+			}
+		});
+		//alert( "value2: " + document.getElementById("flag").value);
+	return result;
+}
+
+
+
+
+/***********************************************************************************/
+
+
+
+
+
+
+
+
+
+
+/******FIRST TRY ******/
+/* validator for the user/password form*/
+function validateForm(userForm){
+	
+	/******UNCOMMENT line 6, 7 for hw 5 **/
+	//local user and password info
+	user = document.getElementById('usermail').value;
+	pass = document.getElementById('password').value;
+	/*user="test@test.com";
+	pass="test";*/
+	//alert ("email:" + user + "   password: " + pass);
+	if (pass && user){
+	
+		// Validate email and navigate 
+		if (validateEmail(user)){
+			//findUser(user);
+			
+			createRef(user,pass);
+			
+			//var test = createRef(user,pass);
+			//if (test){
+			/*if(createRef(user,pass))
+			{
+				alert("Successfully created account! Please log in!");
+				
+			}
+			else {
+				alert("Try a different user email");
+				
+			}*/
+			//createRef(user,pass);
+			
+			
+			
+			//document.loginForm.action ="login.html";
+			return true;
+		}
+		else{
+			alert("Invalid email address!");
+			document.loginForm.usermail.focus(); 
+			document.getElementById("password").value = "";
+			
+			return false;
+		}
+	}
+	else {
+		return false;
+	}
+}
+
+/* returns true if email address is in right form and complete */
+function validateEmail(email){
+	var regex = /(.+)@(.+){2,}\.(.+){2,}/;
+	if (regex.test(email)){
+
+		return true;
+	}
+	
+	else {
+	
+		return false;
+	}
+
+}
+
+/***Function to identify which submit button (sign up or log in was pressed ***
+function getSubmit(){
+	
+	
+}*/
+
+/*****MAY NOT NEED! firebase's checkUser function checks for doubles!!!
+      checks database for existing user and adds if not. returns true for success, else false ****
+	  
+function findUser(user){
+	alert("in findUser");
+	//create firebase reference
+	var userRef = new Firebase('https://burning-inferno-2190.firebaseio.com');
+	//alert("after");
+	
+	//create user
+	
+}*/
+
+
+function createRef(user,pass){
+	//result=true;
+	alert("user : " + user);
+	alert("pass : " + pass);
+	
+	var ref = new Firebase('https://burning-inferno-2190.firebaseio.com');
+	
+	// call firebase createUser() function which has built in form validator and checks if email already exists
+	
+	ref.createUser({
+		email    : user,
+		password : pass
+		}, function(error, userData) {
+			if (error) {
+				console.log("Error creating user:", error);
+			} else {
+				console.log("Successfully created user account with uid:", userData.uid);
+			}
+		});
+	
+	/*** MY version 
+	ref.createUser({
+		email: user,
+		password: pass
+		}, function(error, userData) {
+			if (error) {
+				//alert("Error creating user: ", error);
+				console.log("Error creating user: ", error);
+				//alert("false");
+				//alert(error);
+				//result = false;
+				return false;
+				
+			} else {
+				
+				//console.log("Successfully created user account with uid:", userData.uid);
+				alert("true");
+				//result = true;
+				return true;
+			}
+			
+			});
+	**/
+	
+
+
+}
